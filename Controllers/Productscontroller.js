@@ -1,7 +1,7 @@
 const mongooose = require("mongoose");
-const Product = require("../Modules/productsmodules");
+const Product = require("../Modules/ProductsModule");
 
-const productcreate = async (req, res) => {
+const productCreate = async (req, res) => {
   const { productName, price, image, categoryID, storeID, newprice, itsnew } =
     req.body;
   try {
@@ -20,7 +20,7 @@ const productcreate = async (req, res) => {
   }
 };
 
-const productget = async (req, res) => {
+const productRead = async (req, res) => {
   try {
     const product = await Product.find();
     res.status(200).json(product);
@@ -29,7 +29,7 @@ const productget = async (req, res) => {
   }
 };
 
-const productgetone = async (req, res) => {
+const productReadOne = async (req, res) => {
   const { id } = req.params;
   try {
     const product = await Product.findById({ id });
@@ -39,7 +39,7 @@ const productgetone = async (req, res) => {
   }
 };
 
-const productupdate = async (req, res) => {
+const productUpdate = async (req, res) => {
   const { id } = req.params;
   const { productName, price, image, categoryID, storeID, newprice, itsnew } =
     req.body;
@@ -64,7 +64,7 @@ const productupdate = async (req, res) => {
   }
 };
 
-const productdelete = async (req, res) => {
+const productDelete = async (req, res) => {
   const { id } = req.params;
   try {
     await Product.findByIdAndDelete(id);
@@ -75,9 +75,9 @@ const productdelete = async (req, res) => {
 };
 
 module.exports = {
-  productcreate,
-  productget,
-  productgetone,
-  productupdate,
-  productdelete,
+  productCreate,
+  productRead,
+  productReadOne,
+  productUpdate,
+  productDelete,
 };

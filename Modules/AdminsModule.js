@@ -10,10 +10,12 @@ const adminSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  
-},{timestamp:true});
+  },
 
-const Admin = mongoose.model('Admin', adminSchema);
+  {timestamp:true}
+);
+
+const Admin = mongoose.model('admins', adminSchema);
 
 module.exports = Admin;
 

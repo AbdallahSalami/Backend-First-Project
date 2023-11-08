@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const Admin = require("../Modules/Admin.js");
+const Admin = require("../Modules/AdminsModule");
 
-const admincreate = async (req, res) => {
+const adminCreate = async (req, res) => {
   const { email, password } = req.body;
   try {
     const admin = await Admin.create({ email, password });
@@ -13,7 +13,7 @@ const admincreate = async (req, res) => {
 
 
 
-const adminget = async (req, res) => {
+const adminRead = async (req, res) => {
   try {
     const admin = await Admin.find({}, { password: 0 });
     res.status(200).json(admin);
@@ -25,7 +25,7 @@ const adminget = async (req, res) => {
 
 
 
-const adminupdate = async (req, res) => {
+const adminUpdate = async (req, res) => {
     const { id } = req.params;
     const { email, password } = req.body;
     try {
@@ -43,7 +43,7 @@ const adminupdate = async (req, res) => {
 
   
 
-  const admindelete = async (req, res) => {
+  const adminDelete = async (req, res) => {
     const { id } = req.params;
     try {
        await Admin.findByIdAndDelete(
@@ -56,9 +56,9 @@ const adminupdate = async (req, res) => {
   };
   
   module.exports = {
-    admincreate,
-    adminget,
-    adminupdate,
-    admindelete
+    adminCreate,
+    adminRead,
+    adminUpdate,
+    adminDelete
   };
   

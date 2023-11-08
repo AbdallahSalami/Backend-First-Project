@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-const Category = require("../Modules/categoriesmodules");
+const Category = require("../Modules/CategoriesModule");
 
 
 
-const categorycreate = async (req, res) => {
+const categoryCreate = async (req, res) => {
   const {  categoryName, storeID } = req.body;
   if (!mongoose.Types.ObjectId.isValid(storeID)) {
     return res.status(400).json({ error: 'Invalid storeID' });
@@ -11,7 +11,7 @@ const categorycreate = async (req, res) => {
   try {
     const category = await Category.create({
       categoryName,
-      storeID,
+      stostoreIDreID,
     });
     res.status(200).json(category);
   } catch (error) {
@@ -20,7 +20,7 @@ const categorycreate = async (req, res) => {
 };
 
 
-const categoryget = async (req, res) => {
+const categoryRead = async (req, res) => {
   try {
     const category = await Category.find();
     res.status(200).json(category);
@@ -30,7 +30,7 @@ const categoryget = async (req, res) => {
 };
 
 
-const categorygetone = async (req, res) => {
+const categoryReadOne = async (req, res) => {
   const { id } = req.params;
   try {
     const category = await Category.findById({ id });
@@ -41,7 +41,7 @@ const categorygetone = async (req, res) => {
 };
 
 
-const categoryupdate = async (req, res) => {
+const categoryUpdate = async (req, res) => {
   const { id } = req.params;
   const { categoryName, storeID } = req.body;
   if (!mongoose.Types.ObjectId.isValid(storeID)) {
@@ -60,7 +60,7 @@ const categoryupdate = async (req, res) => {
 };
 
 
-const categorydelete = async (req, res) => {
+const categoryDelete = async (req, res) => {
   const { id } = req.params;
   try {
     await Category.findByIdAndDelete(id);
@@ -72,9 +72,9 @@ const categorydelete = async (req, res) => {
 
 
 module.exports = {
-  categorycreate,
-  categoryget,
-  categorygetone,
-  categoryupdate,
-  categorydelete,
+  categoryCreate,
+  categoryRead,
+  categoryReadOne,
+  categoryUpdate,
+  categoryDelete,
 };

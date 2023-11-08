@@ -1,12 +1,11 @@
 const mongoose = require ('mongoose');
-const Offers = require ('../Modules/Offersmodules')
+const Offer = require ('../Modules/OffersModule')
 
 
-const offerscreate = async (req, res) => {
-    const { productID,description } = req.body;
+const offerCreate = async (req, res) => {
+    const { productID ,description } = req.body;
     try {
-      
-      const offer = await Offers.create({productID,description });
+      const offer = await Offer.create({productID ,description });
       res.status(200).json(offer);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -15,9 +14,9 @@ const offerscreate = async (req, res) => {
   
 
 
-  const offersget = async (req, res) => {
+  const offerRead = async (req, res) => {
     try {
-      const offer = await Offers.find();
+      const offer = await Offer.find();
       res.status(200).json(offer);
     } catch (error) {
       res.status(400).json({ error: { ...error } });
@@ -26,10 +25,10 @@ const offerscreate = async (req, res) => {
 
 
 
-  const offersgetone = async (req, res) => {
+  const offerReadOne = async (req, res) => {
     const {id}=req.params;
     try {
-      const offer = await Offers.findById({id});
+      const offer = await Offer.findById({id});
       res.status(200).json(offer);
     } catch (error) {
       res.status(400).json({ error: { ...error } });
@@ -40,11 +39,11 @@ const offerscreate = async (req, res) => {
 
 
 
-  const offersupdate = async (req, res) => {
+  const offerUpdate = async (req, res) => {
     const { id } = req.params;
     const {productID,description } = req.body;
     try {
-      const offer = await Offers.findByIdAndUpdate(
+      const offer = await Offer.findByIdAndUpdate(
         id,
         {productID ,description },
         { new: true }
@@ -58,7 +57,7 @@ const offerscreate = async (req, res) => {
 
 
 
-  const offersdelete = async (req, res) => {
+  const offerDelete = async (req, res) => {
     const { id } = req.params;
     try {
        await Offers.findByIdAndDelete(
@@ -71,10 +70,10 @@ const offerscreate = async (req, res) => {
   };
   
   module.exports = {
-    offerscreate,
-    offersget,
-    offersgetone,
-    offersupdate,
-    offersdelete
+    offerCreate,
+    offerRead,
+    offerReadOne,
+    offerUpdate,
+    offerDelete
   };
   

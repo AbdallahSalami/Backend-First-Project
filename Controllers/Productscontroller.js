@@ -32,7 +32,9 @@ const productRead = async (req, res) => {
 const productReadOne = async (req, res) => {
   const { id } = req.params;
   try {
-    const product = await Product.findById({ id });
+    const product = await Product.findById(id)
+      .populate(["categoryID", "storeID"])
+      .exec();
     res.status(200).json(product);
   } catch (error) {
     res.status(400).json({ error: { ...error } });

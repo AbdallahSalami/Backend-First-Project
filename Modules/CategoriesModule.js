@@ -1,24 +1,24 @@
 const mongoose = require("mongoose");
 
-const categorySchema = new mongoose.Schema({
-  categoryName: {
-    type: String,
-    required: true,
+const categorySchema = new mongoose.Schema(
+  {
+    categoryName: {
+      type: String,
+      required: true,
     },
-  storeID: {
-    type: mongoose.Schema.Types.ObjectId, ref: 'groceriesStore' ,
-    }
+    storeID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "groceriesStore",
+    },
   },
-  {timestamps:true}
+  { timestamps: true }
 );
 
 categorySchema.pre("find", function (next) {
-  this.populate('categoryName');
+  this.populate("storeID");
   next();
 });
 
+const Category = mongoose.model("categories", categorySchema);
 
-const Category = mongoose.model('categories', categorySchema);
-
-module.exports= Category;
-
+module.exports = Category;
